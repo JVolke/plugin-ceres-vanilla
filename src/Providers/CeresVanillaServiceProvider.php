@@ -11,6 +11,7 @@ use Plenty\Plugin\Templates\Twig;
 use IO\Helper\TemplateContainer;
 use IO\Extensions\Functions\Partial;
 use Plenty\Plugin\ConfigRepository;
+use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 
 
 /**
@@ -29,6 +30,11 @@ class CeresVanillaServiceProvider extends ServiceProvider
     public function boot(Twig $twig, Dispatcher $dispatcher, ConfigRepository $config)
     {
 
+          $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
+            $templateContainer->setTemplates([
+            ResultFieldTemplate::TEMPLATE_SINGLE_ITEM   => 'CeresVanilla::ResultFields.SingleItem'
+          ]);
+        }, 0);
         $enabledOverrides = explode(", ", $config->get("CeresVanilla.templates.override"));
 
         // Override partials
@@ -253,4 +259,3 @@ class CeresVanillaServiceProvider extends ServiceProvider
         }
     }
 }
-
