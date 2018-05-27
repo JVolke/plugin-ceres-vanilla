@@ -13,8 +13,6 @@
     "item.storeSpecial",
     "item.condition.names.*",
     "item.add_cms_page",
-    "stock.*",
-    "variationProperties",
 
     "variation.id",
     "variation.name",
