@@ -30,13 +30,8 @@ class CeresVanillaServiceProvider extends ServiceProvider
     public function boot(Twig $twig, Dispatcher $dispatcher, ConfigRepository $config)
     {
 
-          $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
-            $templateContainer->setTemplates([
-            ResultFieldTemplate::TEMPLATE_SINGLE_ITEM   => 'CeresVanilla::ResultFields.SingleItem'
-          ]);
-          return false;
-        }, 0);
         $enabledOverrides = explode(", ", $config->get("CeresVanilla.templates.override"));
+        $enabledOverridesResultField = explode(", ", $config->get("CeresVanilla.templates.ResultFields"));
 
         // Override partials
         $dispatcher->listen('IO.init.templates', function (Partial $partial) use ($enabledOverrides)
@@ -258,5 +253,32 @@ class CeresVanillaServiceProvider extends ServiceProvider
                 return false;
             }, self::PRIORITY);
         }
+
+        // Override ResultFieldsTemplate
+        if (in_array("single_item", $enabledOverridesResultField) || in_array("all", $enabledOverridesResultField))
+        {
+          $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
+            $templateContainer->setTemplates([
+            ResultFieldTemplate::TEMPLATE_SINGLE_ITEM   => 'CeresVanilla::ResultFields.SingleItem'
+          ]);
+        }, 0);
+       }
+
+       if (in_array("list_item", $enabledOverridesResultField) || in_array("all", $enabledOverridesResultField))
+       {
+          $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
+            $templateContainer->setTemplates([
+            ResultFieldTemplate::TEMPLATE_LIST_ITEM  => 'CeresVanilla::ResultFields.ListItem'
+          ]);
+        }, 0);
+      }
+        if (in_array("basket_item", $enabledOverridesResultField) || in_array("all", $enabledOverridesResultField))
+        {
+        $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
+          $templateContainer->setTemplates([
+          ResultFieldTemplate::TEMPLATE_BASKET_ITEM   => 'CeresVanilla::ResultFields.BasketItem'
+        ]);
+      }, 0);
+      }
     }
 }
