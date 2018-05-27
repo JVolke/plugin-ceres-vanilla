@@ -97,8 +97,7 @@
                             }
                         ]
                     }
-                }
-            },
+                },
             "templates.ResultFields": {
                 "type": "multiCheckBox",
                 "required": false,
@@ -121,6 +120,7 @@
                     ]
                   }
                 }
+              }
         }
     }
 }
