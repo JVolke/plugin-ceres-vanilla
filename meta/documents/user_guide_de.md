@@ -51,7 +51,7 @@ Nach Installation und Bereitstellung des Plugins geben Sie Ihr eigenes CSS in de
 
 ###### Hinweis
 Sie können hier nur die Daten ausgeben lassen, die auch im Elastic Search Index enthalten sind.
-Tragen Sie in einer der \*.fields.json Datei nur [ "\*" ] ein, dann werden alle Daten für den Bereich aus dem Elastic Search Index bereitgestellt.
+Tragen Sie in einer der fields.json Datei nur [ "\*" ] ein, dann werden alle Daten für den Bereich aus dem Elastic Search Index bereitgestellt.
 
 ## Lizenz
 
