@@ -5,7 +5,7 @@
 {{ component( "Ceres::Item.Components.AddToWishList" ) }}
 {{ component( "Ceres::Item.Components.OrderProperties" ) }}
 {{ component( "Ceres::Item.Components.OrderPropertyList" ) }}
-{{ component( "Ceres::Item.Components.SingleItem" ) }}
+{{ component( "CeresVanilla::Item.Components.SingleItem" ) }}
 {{ component( "Ceres::Item.Components.GraduatedPrices" ) }}
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
@@ -21,4 +21,5 @@
     <template slot="AddDetailTabsContent">{{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent", item.documents[0].data) }}</template>
     <div slot="ItemListContainer">{{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}</div>
     <div slot="FeedbackContainer">{{ LayoutContainer.show("Ceres::SingleItem.FeedbackContainer", item) }}</div>
+    <div slot="FreitextFeld">{{ freeField | json_encode }}</div>
 </single-item>
