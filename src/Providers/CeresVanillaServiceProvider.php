@@ -9,6 +9,7 @@ use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Events\Dispatcher;
 use Plenty\Plugin\Templates\Twig;
 use IO\Helper\TemplateContainer;
+use IO\Helper\ComponentContainer;
 use IO\Extensions\Functions\Partial;
 use Plenty\Plugin\ConfigRepository;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
