@@ -274,11 +274,17 @@ class CeresVanillaServiceProvider extends ServiceProvider
       }
         if (in_array("basket_item", $enabledOverridesResultField) || in_array("all", $enabledOverridesResultField))
         {
-        $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
-          $templateContainer->setTemplates([
-          ResultFieldTemplate::TEMPLATE_BASKET_ITEM   => 'CeresVanilla::ResultFields.BasketItem'
-        ]);
-      }, 0);
+          $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
+            $templateContainer->setTemplates([
+            ResultFieldTemplate::TEMPLATE_BASKET_ITEM   => 'CeresVanilla::ResultFields.BasketItem'
+          ]);
+          }, 0);
+        }
+        $dispatcher->listen('IO.Component.Import', function(ComponentContainer $container){
+      if( $container->getOriginComponentTemplate() == 'Ceres::Basket.Components.BasketListItem')
+      {
+         $container->setNewComponentTemplate('CeresVanilla::Basket.Components.BasketListItem');
       }
+    }, 0);
     }
 }
