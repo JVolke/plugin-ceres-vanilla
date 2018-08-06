@@ -24,7 +24,7 @@
     <div slot="FreitextFeld">{{ freeField | json_encode }}</div>
     <div slot="Property">
       {% for property in item.documents[0].data.properties %}
-        {% if property.group.id == 1 %}
+        {% if property.group.id == "1" %}
           <span>{{ property.property.names.name }}</span>
         {% endif %}
       {% endfor %}
