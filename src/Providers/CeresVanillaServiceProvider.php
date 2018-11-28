@@ -12,7 +12,6 @@ use IO\Helper\TemplateContainer;
 use IO\Helper\ComponentContainer;
 use IO\Extensions\Functions\Partial;
 use Plenty\Plugin\ConfigRepository;
-use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 use CeresVanilla\Contexts\CeresVanillaSingleItemContext;
 
 
@@ -256,32 +255,6 @@ class CeresVanillaServiceProvider extends ServiceProvider
             }, self::PRIORITY);
         }
 
-        // Override ResultFieldsTemplate
-        if (in_array("single_item", $enabledOverridesResultField) || in_array("all", $enabledOverridesResultField))
-        {
-          $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
-            $templateContainer->setTemplates([
-            ResultFieldTemplate::TEMPLATE_SINGLE_ITEM   => 'CeresVanilla::ResultFields.SingleItem'
-          ]);
-        }, 0);
-       }
-
-       if (in_array("list_item", $enabledOverridesResultField) || in_array("all", $enabledOverridesResultField))
-       {
-          $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
-            $templateContainer->setTemplates([
-            ResultFieldTemplate::TEMPLATE_LIST_ITEM  => 'CeresVanilla::ResultFields.ListItem'
-          ]);
-        }, 0);
-      }
-        if (in_array("basket_item", $enabledOverridesResultField) || in_array("all", $enabledOverridesResultField))
-        {
-          $dispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
-            $templateContainer->setTemplates([
-            ResultFieldTemplate::TEMPLATE_BASKET_ITEM   => 'CeresVanilla::ResultFields.BasketItem'
-          ]);
-          }, 0);
-        }
         $dispatcher->listen('IO.Component.Import', function(ComponentContainer $container){
       if( $container->getOriginComponentTemplate() == 'Ceres::Basket.Components.BasketListItem')
       {
