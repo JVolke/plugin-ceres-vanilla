@@ -13,6 +13,7 @@ use IO\Helper\ComponentContainer;
 use IO\Extensions\Functions\Partial;
 use Plenty\Plugin\ConfigRepository;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
+use CeresVanilla\Contexts\CeresVanillaSingleItemContext;
 
 
 /**
@@ -287,5 +288,11 @@ class CeresVanillaServiceProvider extends ServiceProvider
          $container->setNewComponentTemplate('CeresVanilla::Basket.Components.BasketListItem');
       }
     }, 0);
+
+    $dispatcher->listen('IO.ctx.item', function (TemplateContainer $templateContainer, $templateData = [])
+{
+    $templateContainer->setContext( CeresVanillaSingleItemContext::class);
+    return false;
+}, 0);
     }
 }
